@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package myservice;
+
+service PipelineCompilerService {
+  rpc CompilePipeline (CompileRequest) returns (CompileReply) {}
+}
+
+// Define the enum
+enum CompilationResult {
+  UNKNOWN = 0;
+  OK = 1;
+  SYNTAX_ERROR = 2;
+  EXCEPTION = 3;
+}
+
+
+message CompileRequest {
+  bytes data = 1;
+}
+
+message CompileReply {
+  CompilationResult statusCode = 1;
+  string message = 2;
+  optional bytes data = 3;
+}
